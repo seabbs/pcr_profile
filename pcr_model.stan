@@ -18,6 +18,7 @@ parameters {
   // real <lower = 0> alpha;
   // real <lower = 0> beta;
   real mu;
+  real <lower = 0> sigma;
 }
 
 transformed parameters {
@@ -33,7 +34,8 @@ model {
   real low[P];
 
   mu ~ cauchy(0, 2.5);
-  noise ~ normal(0, 1);
+  sigma ~ normal(0, 1);
+  noise ~ normal(0, sigma);
   
   // loop over all people
     for(j in 1:P) {
